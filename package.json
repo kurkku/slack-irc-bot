@@ -1,0 +1,22 @@
+{
+  "name": "slack-irc-bot",
+  "version": "1.0.0",
+  "description": "A Slack to IRC bot",
+  "main": "app.js",
+  "author": "Olli Lehtinen",
+  "license": "Apache 2.0",
+  "keywords": [
+    "slack",
+    "irc",
+    "bot"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/kurkku/slack-irc-bot.git"
+  },
+  "bugs": "https://github.com/kurkku/slack-irc-bot/issues",
+  "dependencies": {
+    "irc": "^0.4.0",
+    "slack-client": "^1.4.1"
+  }
+}

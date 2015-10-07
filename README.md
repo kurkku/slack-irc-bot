@@ -13,6 +13,7 @@ git clone https://github.com/kurkku/slack-irc-bot.git
 and install dependencies using [npm](http://github.com/isaacs/npm):
 
 ```
+cd slack-irc-bot
 npm install
 ```
 
@@ -37,6 +38,7 @@ The bot is configured by editing following parameters in  [config/config.js](htt
 * ```irc.realName```: Real name of the bot
 * ```irc.localAddress```: Local address of your host (optional)
 * ```irc.debug```: If enabled debug messages are written to console.
+* ```irc.encoding```: Encoding which IRC messages are converted to. Slack expects UTF-8.
 * ```irc.channel.name```: Name of the IRC channel
 * ```irc.channel.protected```: Is the channel password-protected?
 * ```irc.channel.password```: Password of the channel

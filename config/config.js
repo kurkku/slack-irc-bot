@@ -15,6 +15,7 @@ config.irc = {
   realName: "Magical pipe from Slack to IRC and back",
   //localAddress: "",
   debug: false,
+  encoding: 'utf8',
   channel: {
     name: "#ircChannel",
     protected: false,

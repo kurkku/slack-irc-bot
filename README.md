@@ -4,14 +4,17 @@ The application passes messages between a Slack channel and an IRC channel in bo
 
 ## Installation
 
-Clone this repository with [git](https://git-scm.com/):
+Run
+```
+npm install slack-irc-bot
+```
+to install the package using `npm`.
 
+You can also clone this repository with [git](https://git-scm.com/):
 ```
 git clone https://github.com/kurkku/slack-irc-bot.git
 ```
-
 and install dependencies using [npm](http://github.com/isaacs/npm):
-
 ```
 cd slack-irc-bot
 npm install
@@ -43,4 +46,8 @@ The bot is configured by editing following parameters in  [config/config.js](htt
 * ```irc.channel.protected```: Is the channel password-protected?
 * ```irc.channel.password```: Password of the channel
 
+## Running
+Start the bot with `node app.js`
 
+### Docker
+A Docker container of slack-irc-bot is available [here](https://github.com/kurkku/slack-irc-bot-docker).

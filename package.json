@@ -1,6 +1,6 @@
 {
   "name": "slack-irc-bot",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A Slack to IRC bot",
   "main": "app.js",
   "author": "Olli Lehtinen",

@@ -1,3 +1,5 @@
+#!/usr/bin/env node
+
 var config = require('./config/config');
 var Bot = require('./libs/bot');
 var Slack = require('slack-client');

@@ -1,6 +1,6 @@
 {
   "name": "slack-irc-bot",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "A Slack to IRC bot",
   "main": "app.js",
   "author": "Olli Lehtinen",
@@ -18,5 +18,8 @@
   "dependencies": {
     "irc": "^0.4.0",
     "slack-client": "^1.4.1"
+  },
+  "bin": {
+    "slack-irc-bot": "./app.js"
   }
 }

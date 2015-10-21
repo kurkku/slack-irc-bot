@@ -1,0 +1,23 @@
+{
+  "slack": {
+    "token": "TEST-TOKEN",
+    "autoReconnect": true,
+    "autoMark": true,
+    "channel": "slackChannel"
+  },
+  "irc": {
+    "server": "eu.irc6.net",
+    "port": 6667,
+    "nick": "someNick123",
+    "userName": "TestUsername",
+    "realName": "Magical pipe from Slack to IRC and back",
+    "localAddress": "",
+    "debug": false,
+    "encoding": "utf8",
+    "channel": {
+      "name": "#ircChannel",
+      "protected": false,
+      "password": ""
+    }
+  }
+}

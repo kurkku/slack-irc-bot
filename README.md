@@ -2,6 +2,8 @@ slack-irc-bot is a Slack to IRC bot written in [JavaScript](http://en.wikipedia.
 
 The application passes messages between a Slack channel and an IRC channel in both directions.
 
+[![Build Status](http://lovejoy.cloudapp.net:52010/buildStatus/icon?job=slack-irc-bot-CI)](http://lovejoy.cloudapp.net:52010/job/slack-irc-bot-CI)
+
 ## Installation
 
 Install from [npm](http://github.com/isaacs/npm):

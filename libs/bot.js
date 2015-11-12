@@ -49,35 +49,35 @@ Bot.prototype.addListeners = function() {
   this.irc.on('message', function(from, to, text, message) {
     this.sendToSlack(from, text);
   }.bind(this));
-}
+};
 
 Bot.prototype.connect = function() {
   console.log("Connecting servers...");
   this.slack.login();
 
   // Join the password-protected channel after the IRC server has been connected.
-  if (this.config.irc.channel.protected == true) {
+  if (this.config.irc.channel.protected === true) {
     this.irc.connect(function() {
       this.send('JOIN', this.config.irc.channel.name, this.config.irc.channel.password);
     });
   } else {
     this.irc.connect();
   }
-}
+};
 
 Bot.prototype.sendToSlack = function(from, text) {
   var chan = this.slack.getChannelByName(this.config.slack.channel);
   chan.send(from + '@IRC> ' + text);
-}
+};
 
 Bot.prototype.sendToIRC = function(message) {
   // Skip unsupported subtypes
-  if (message.subtype != null && message.subtype !== 'bot_message') {
+  if (message.subtype !== null && message.subtype !== 'bot_message') {
     return;
   }
 
   // Skip hidden messages, such as edited messages.
-  if (message.hidden != null && message.hidden == true) {
+  if (message.hidden !== null && message.hidden === true) {
     return;
   }
 
@@ -87,8 +87,8 @@ Bot.prototype.sendToIRC = function(message) {
   }
 
   // Bot messages
-  if (message.subtype != null && message.subtype === 'bot_message') {
-    if (message.attachments[0] != null) {
+  if (message.subtype !== null && message.subtype === 'bot_message') {
+    if (message.attachments !== null && message.attachments.length > 0 && message.attachments[0].fallback) {
       this.irc.say(this.config.irc.channel.name, "bot> " + message.attachments[0].fallback);
     }
     return;
@@ -100,7 +100,7 @@ Bot.prototype.sendToIRC = function(message) {
   var user = this.slack.getUserByID(message.user);
   var msg = user.name + '> ' + body;
   this.irc.say(this.config.irc.channel.name, msg);
-}
+};
 
 Bot.prototype.decode = function(str) {
   return str

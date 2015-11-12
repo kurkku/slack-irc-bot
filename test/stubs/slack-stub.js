@@ -13,8 +13,8 @@ SlackStub.prototype.getChanStub = function() {
   if (this.wrong) {
     return null;
   }
-  return new SlackChannelStub;
-}
+  return new SlackChannelStub();
+};
 
 SlackStub.prototype.login = sinon.stub();
 SlackStub.prototype.getChannelGroupOrDMByID = SlackStub.prototype.getChanStub;
@@ -31,10 +31,10 @@ SlackStub.prototype.getUserByID = function() {
   return {
     name: 'john_doe'
   };
-}
+};
 
 SlackStub.prototype.reset = function() {
   this.wrong = false;
-}
+};
 
 module.exports = SlackStub;

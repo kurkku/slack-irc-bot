@@ -15,6 +15,7 @@ describe('Bot functionality', function() {
   before(function() {
     irc.Client = IrcClientStub;
     Bot.__set__('Slack', SlackStub);
+    Bot.__set__('Bot.slack', SlackStub);
     this.bot = new Bot(config);
     this.bot.connect();
   });
@@ -53,7 +54,7 @@ describe('Bot functionality', function() {
       attachments: [
         {fallback: fallback}
       ]
-    }
+    };
     this.bot.sendToIRC(slackMessage);
     var textAssert = 'bot> I AM A ROBOT';
     IrcClientStub.prototype.say.should.have.been.calledWith('#ircChannel', textAssert);
@@ -67,7 +68,7 @@ describe('Bot functionality', function() {
       getBody: function() {
         return text;
       }
-    }
+    };
     this.bot.sendToIRC(slackMessage);
     IrcClientStub.prototype.say.should.not.have.been.called;
   });
@@ -79,7 +80,7 @@ describe('Bot functionality', function() {
       getBody: function() {
         return text;
       }
-    }
+    };
     this.bot.sendToIRC(slackMessage);
     var textAssert = 'john_doe> ' + 'Hello john_doe and detritius, how are you?';
     IrcClientStub.prototype.say.should.have.been.calledWith('#ircChannel', textAssert);
@@ -105,7 +106,7 @@ describe('Bot functionality', function() {
     };
     this.bot.sendToIRC(slackMessage);
     IrcClientStub.prototype.say.should.not.have.been.called;
-  })
+  });
 
   it("should not send unsupported slack messages to irc", function() {
     var text = 'Hello world!';
@@ -126,10 +127,18 @@ describe('Bot functionality', function() {
       type: 'message',
       subtype: 'bot_message',
       attachments: []
-    }
+    };
     this.bot.sendToIRC(slackMessage);
     var textAssert = 'bot> I AM A ROBOT';
     IrcClientStub.prototype.say.should.not.have.been.called;
+  });
+
+  it("should convert timestamps to readable date strings", function() {
+    var msg = "Remember the Task: <!date^1446102000^{date_short_pretty}|Oct 29, 2015> to <!date^1446274800^{date_short_pretty}|Oct 31, 2015 PDT>";
+    var d1 = new Date(1446102000 * 1000);
+    var d2 = new Date(1446274800 * 1000);
+    var correct = "Remember the Task: " + d1 + " to " + d2;
+    this.bot.decode(msg).should.equal(correct);
   });
 
 });

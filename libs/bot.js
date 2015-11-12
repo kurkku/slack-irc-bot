@@ -72,12 +72,12 @@ Bot.prototype.sendToSlack = function(from, text) {
 
 Bot.prototype.sendToIRC = function(message) {
   // Skip unsupported subtypes
-  if (message.subtype !== null && message.subtype !== 'bot_message') {
+  if (typeof message.subtype != 'undefined' && message.subtype !== 'bot_message') {
     return;
   }
 
   // Skip hidden messages, such as edited messages.
-  if (message.hidden !== null && message.hidden === true) {
+  if (typeof message.hidden != 'undefined' && message.hidden === true) {
     return;
   }
 
@@ -87,8 +87,8 @@ Bot.prototype.sendToIRC = function(message) {
   }
 
   // Bot messages
-  if (message.subtype !== null && message.subtype === 'bot_message') {
-    if (message.attachments !== null && message.attachments.length > 0 && message.attachments[0].fallback) {
+  if (typeof message.subtype != 'undefined' && message.subtype === 'bot_message') {
+    if (typeof message.attachments != 'undefined' && message.attachments.length > 0 && message.attachments[0].fallback) {
       this.irc.say(this.config.irc.channel.name, "bot> " + message.attachments[0].fallback);
     }
     return;
@@ -96,7 +96,6 @@ Bot.prototype.sendToIRC = function(message) {
 
   // User messages
   var body = this.decode(message.getBody());
-
   var user = this.slack.getUserByID(message.user);
   var msg = user.name + '> ' + body;
   this.irc.say(this.config.irc.channel.name, msg);
@@ -112,6 +111,9 @@ Bot.prototype.decode = function(str) {
     }.bind(this))
     .replace(/<(\S+)>/g, function(m, url) {
       return url;
+    })
+    .replace(/<!date\^(\d+)\^\{date_short_pretty\}\|[^>]+>/g, function(match, ts) {
+      return new Date(ts * 1000);
     })
     .replace(/:smile:|:smiley:|:blush:|:relaxed:|:relieved:/g, ':)')
     .replace(/:confused:|:disappointed:|:worried:/g, ':(' )

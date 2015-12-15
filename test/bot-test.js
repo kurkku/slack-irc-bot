@@ -134,11 +134,17 @@ describe('Bot functionality', function() {
   });
 
   it("should convert timestamps to readable date strings", function() {
-    var msg = "Remember the Task: <!date^1446102000^{date_short_pretty}|Oct 29, 2015> to <!date^1446274800^{date_short_pretty}|Oct 31, 2015 PDT>";
+    var msg1 = "Remember the Task: <!date^1446102000^{date_short_pretty}|Oct 29, 2015> to <!date^1446274800^{date_short_pretty}|Oct 31, 2015 PDT>";
     var d1 = new Date(1446102000 * 1000);
     var d2 = new Date(1446274800 * 1000);
     var correct = "Remember the Task: " + d1 + " to " + d2;
-    this.bot.decode(msg).should.equal(correct);
+    this.bot.decode(msg1).should.equal(correct);
+
+    var msg2 = "<!date^1469703600^{date_short_pretty} from {time}|Jul 28, 2016 from 2:00 PM> to <!date^1469966400^{date_short_pretty} at {time}|Jul 31, 2016 at 3:00 PM GMT+0300>";
+    d1 = new Date(1469703600 * 1000);
+    d2 = new Date(1469966400 * 1000);
+    correct = d1 + " to " + d2;
+    this.bot.decode(msg2).should.equal(correct);
   });
 
 });

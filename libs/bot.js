@@ -112,7 +112,7 @@ Bot.prototype.decode = function(str) {
     .replace(/<(\S+)>/g, function(m, url) {
       return url;
     })
-    .replace(/<!date\^(\d+)\^\{date_short_pretty\}\|[^>]+>/g, function(match, ts) {
+    .replace(/<!date\^(\d+)\^\{date_short_pretty\}.*?\|[^>]+>/g, function(match, ts) {
       return new Date(ts * 1000);
     })
     .replace(/:smile:|:smiley:|:blush:|:relaxed:|:relieved:/g, ':)')
